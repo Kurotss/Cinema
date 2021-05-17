@@ -1,0 +1,56 @@
+﻿<Page x:Class="Cinema.Pages.FilmInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cinema.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FilmInfo" Loaded="Page_Loaded">
+
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Height="250">
+                <Image Name="PosterImage" Width="150" Height="200" Margin="20"/>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Width="600">
+                        <TextBlock Name="Header" FontSize="20" FontFamily="Verdana" FontWeight="Bold" Foreground="#303030" Margin="0,20"/>
+                        <TextBlock Name="DescrBlock" TextWrapping="Wrap" FontSize="15" FontFamily="Verdana" Foreground="#303030"/>
+                        <TextBlock Name="Age" FontFamily="Verdana" FontSize="18" Foreground="#303030"/>
+                        <StackPanel Orientation="Horizontal" Name="RaitingButtons">
+                            <StackPanel.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="30"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="Оценить: " Foreground="#303030" FontSize="20" FontFamily="Verdana"/>
+                                <Button Name="s1" Click="Rate">
+                                <Image Source="/Resources/starRaiting.png"/>
+                            </Button>
+                            <Button Name="s2" Click="Rate">
+                                <Image Source="/Resources/starRaiting.png"/>
+                            </Button>
+                            <Button Name="s3" Click="Rate">
+                                <Image Source="/Resources/starRaiting.png"/>
+                            </Button>
+                            <Button Name="s4" Click="Rate">
+                                <Image Source="/Resources/starRaiting.png"/>
+                            </Button>
+                            <Button Name="s5" Click="Rate">
+                                <Image Source="/Resources/starRaiting.png"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+            <ComboBox Name="ListMovies" Width="350" Margin="5"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <Border BorderBrush="#efcadf" BorderThickness="0,0.5,0,0.5" Margin="20,0">
+                    <StackPanel Name="MoviesPanel" Orientation="Vertical"/>
+                </Border>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>

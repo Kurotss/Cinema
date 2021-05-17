@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Cinema.Film_icon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cinema"
+             mc:Ignorable="d" 
+             d:DesignHeight="313" d:DesignWidth="206">
+    <Grid>
+        <Canvas Name="Canvas" Width="206" Height="313" ClipToBounds="true" Background="Transparent" MouseEnter="Info" MouseLeave="InfoLeave">
+            <Canvas.Resources>
+                <Style x:Key="Title_gradient" TargetType="TextBlock">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0,1" Opacity="0.8">
+                                <GradientStop Color="#3B3B3B" Offset="0"/>
+                                <GradientStop Color="#3B3B3B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Canvas.Resources>
+            <Image Width="206" Height="313" Source="{Binding Poster_film}" Canvas.Bottom="0"/>
+            <TextBlock Width="206" Height="55" FontSize="16" Foreground="White" Text="{Binding NewName}" TextAlignment="Center"
+                      Style="{StaticResource Title_gradient}" FontWeight="Bold" Canvas.Bottom="0" TextWrapping="Wrap" FontFamily="Verdana"/>
+            <Button Name="RatButton" Width="206" Height="0" Background="#303030" Foreground="White" Canvas.Bottom="0" Click="OpenInfo">
+                <StackPanel Margin="0,5">
+                    <Border CornerRadius="15" BorderBrush="White" Background="White" Width="60" Padding="4">
+                        <StackPanel Orientation="Horizontal" Height="20">
+                            <TextBlock Width="29" Height="24" FontSize="22" Text="{Binding Raiting_film}" TextAlignment="Right"
+                                   Foreground="#303030" Margin="0,-6,0,0"/>
+                            <Image Source="Resources/star.png" Width="25" Height="20"/>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Width="206" Height="60" FontSize="17" Text="{Binding Genres_list}" Margin="0,5"
+                        Foreground="#B6B6B4" TextAlignment="Center" FontFamily="Verdana"/>
+                </StackPanel>
+            </Button>
+            <Button Name="Delete" Canvas.Right="0" Width="40" Visibility="Hidden">
+                <Button.Content>
+                    <Image Source="/Resources/refundTicket.png"/>
+                </Button.Content>
+            </Button>
+        </Canvas>
+    </Grid>
+</UserControl>

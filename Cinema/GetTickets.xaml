@@ -1,0 +1,184 @@
+﻿<Window x:Class="Cinema.GetTickets"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema"
+        xmlns:uc="clr-namespace:Cinema.Classes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="Покупка билета" Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Icon="/Resources/logo.png">
+    <TabControl Name="tabControl">
+        <TabItem Header="Выбор места">
+            <TabItem.Content>
+                <Grid Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" Name="A"/>
+                        <RowDefinition Height="45" Name="B"/>
+                        <RowDefinition Height="162" Name="C"/>
+                        <RowDefinition Height="55" Name="D"/>
+                        <RowDefinition Height="50" Name="E"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.RowSpan="5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#FF5757" Offset="0"/>
+                                <GradientStop Color="#5271FF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Width="120" Height="35" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent"
+                BorderBrush="Transparent" Click="Close" Name="Back">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Resources/pointer.png" Width="20" Height="20"/>
+                            <TextBlock Text="Назад" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                    <Border BorderBrush="White" BorderThickness="0,1,0,1" Height="110" VerticalAlignment="Bottom">
+                        <StackPanel Grid.Row="0" Height="110" VerticalAlignment="Bottom" Orientation="Horizontal">
+                            <Image Name="PosterFilm" Height="90" Width="60" Margin="40,10,40,10"/>
+                            <StackPanel Width="660">
+                                <TextBlock Name="Header" FontSize="22" Foreground="White" Height="30" Margin="0,25,0,0"/>
+                                <TextBlock Name="Time" FontSize="18" Height="30" Foreground="White" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Path Stroke="White" StrokeThickness="3" Grid.Row="1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure IsClosed="false" StartPoint="700, 38">
+                                    <ArcSegment Point="90, 38" Size="450,40"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                    <StackPanel Name="NumberRowLeft" Grid.Row="2" Grid.RowSpan="2" Width="96" HorizontalAlignment="Left">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Right"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="Margin" Value="1.8"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="1"/>
+                        <TextBlock Text="2"/>
+                        <TextBlock Text="3"/>
+                        <TextBlock Text="4"/>
+                        <TextBlock Text="5"/>
+                        <TextBlock Text="6"/>
+                        <TextBlock Text="7"/>
+                        <TextBlock Text="8"/>
+                    </StackPanel>
+                    <WrapPanel Height="170" Name="wrappanelFirst" VerticalAlignment="Center" Grid.Row="2" Margin="200,0,200,0"/>
+                    <WrapPanel Height="49" Name="wrappanelSecond" VerticalAlignment="Center" Grid.Row="3" Margin="103,0,103,0"/>
+                    <StackPanel Name="NumberRowRight" Grid.Row="2" Grid.RowSpan="2" Width="106" HorizontalAlignment="Left" Margin="694,0,0,0">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Left"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="Margin" Value="1.8"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="1"/>
+                        <TextBlock Text="2"/>
+                        <TextBlock Text="3"/>
+                        <TextBlock Text="4"/>
+                        <TextBlock Text="5"/>
+                        <TextBlock Text="6"/>
+                        <TextBlock Text="7"/>
+                        <TextBlock Text="8"/>
+                    </StackPanel>
+                    <Button Name="CostButton" HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Bottom" Margin="5" Width="90"
+                            Height="40" FontSize="18" Background="#FFE26C" Visibility="Hidden" Click="OpenCheque"/>
+                </Grid>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem Name="Conf" Visibility="Hidden">
+            <TabItem.Header>
+                <Label Content="Подтверждение" MouseLeftButtonDown="OpenConf"/>
+            </TabItem.Header>
+            <Grid>
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Fill="White" Width="300" Height="450"/>
+                <Button Width="120" Height="35" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent"
+                BorderBrush="Transparent" Click="Close">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/pointer.png" Width="20" Height="20"/>
+                        <TextBlock Text="Назад" FontSize="20" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <StackPanel Orientation="Vertical" Width="300" Height="450">
+                    <Rectangle Height="40"/>
+                    <TextBlock Name="NameFilm" FontSize="25" TextAlignment="Left" Height="60" TextWrapping="Wrap" Margin="10"/>
+                    <TextBlock Name="TimeCheque" Margin="10" Height="30" FontSize="18"/>
+                    <Border BorderThickness="1" BorderBrush="#b8b8b8">
+                        <ScrollViewer Height="150">
+                            <StackPanel Name="Tickets">
+                                <TextBlock Text="Билеты:" Margin="10" FontSize="18"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <Rectangle Height="10"/>
+                    <StackPanel Orientation="Horizontal" Height="78">
+                        <TextBlock Text="Общая стоимость:" FontSize="20" Margin="10"/>
+                        <TextBlock Name="TotalCost" Width="60" TextAlignment="Right" FontSize="20" Margin="11"/>
+                    </StackPanel>
+                    <Button Content="Подтвердить" Height="40" Background="#FFE26C" FontSize="20" Click="OpenPay"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Оплата" Visibility="Hidden" Name="Payment">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.RowSpan="8">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button Width="120" Height="35" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent"
+                BorderBrush="Transparent" Click="Close">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/pointer.png" Width="20" Height="20"/>
+                        <TextBlock Text="Назад" FontSize="20" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="Введите номер карты:" Grid.Row="2" FontSize="20" Foreground="White" Margin="20,0"/>
+                <xctk:MaskedTextBox Name="NumberCard" Grid.Row="3" Margin="20,0" Width="350" HorizontalAlignment="Left" MaxLength="16" FontSize="20"
+                         Mask="0000 0000 0000 0000"/>
+                <Button Content="Оплатить" Grid.Row="3" Width="180" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FFE26C"
+                       FontSize="20" Click="CreateTickets"/>
+                <TextBlock Name="FinishText" Grid.Row="5" TextAlignment="Center" FontSize="25" TextWrapping="Wrap" Margin="20"
+                    Foreground="White" Visibility="Hidden">
+                Спасибо за покупку! Ваши билеты будут доступны для скачивания в личном кабинете в любой момент.
+                <LineBreak/>
+                Приятного просмотра!
+                </TextBlock>
+                <Button Name="Finish" Width="150" Grid.Row="6" Height="40" FontSize="20" Background="#FFE26C" Content="Закрыть"
+                    Click="Close" Visibility="Hidden"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
