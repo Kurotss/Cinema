@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Cinema.Pages;
 
 namespace Cinema
@@ -22,6 +23,21 @@ namespace Cinema
 		private void FilmsOpen(object sender, RoutedEventArgs e)
 		{
 			MainFrame.Navigate(new FilmsShowAdmin());
+		}
+
+		public void PageOpen(Page page)
+		{
+			MainFrame.Navigate(page);
+		}
+
+		private void FormsOpen(object sender, RoutedEventArgs e)
+		{
+			MainFrame.Navigate(new FormsShowAdmin());
+		}
+
+		private void StaffOpen(object sender, RoutedEventArgs e)
+		{
+			MainFrame.Navigate(new StaffShow());
 		}
 	}
 }

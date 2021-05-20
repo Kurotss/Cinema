@@ -58,5 +58,10 @@ namespace Cinema
 		{
 			MainFrame.Navigate(new Vacancies());
 		}
+
+		private void Contacts_open(object sender, RoutedEventArgs e)
+		{
+			MainFrame.Navigate(new Contact());
+		}
 	}
 }

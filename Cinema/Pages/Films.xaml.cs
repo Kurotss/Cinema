@@ -23,14 +23,15 @@ namespace Cinema
 			var films = db.FilmsRaitingsGenres.ToList();
 			foreach (FilmsRaitingsGenre film in films)
 			{
-				Film filmString = db.Films.Find(film.IdFilm);
-				var genreString = (from Genre in db.Genres where Genre.IdFilm == film.IdFilm select Genre).ToList();
-				Rating ratingString = db.Ratings.Find(film.IdFilm);
-				Film_icon film_Icon = new(Manager.CreateSource(film.Poster), film.NameFilm, film.Genre,
-					Math.Round(film.Rating, 1).ToString(), (int)film.AgeLimit, 1, filmString, genreString, ratingString);
-				film_Icon.Margin = new Thickness(5, 5, 5, 5);
-				film_Icons.Add(film_Icon);
-				wrappanel.Children.Add(film_Icon);
+				if (film.EndDate > DateTime.Now)
+				{
+					Film filmString = db.Films.Find(film.IdFilm);
+					Film_icon film_Icon = new(Manager.CreateSource(film.Poster), film.NameFilm, film.Genre,
+						Math.Round(film.Rating, 1).ToString(), (int)film.AgeLimit, 1, filmString);
+					film_Icon.Margin = new Thickness(5, 5, 5, 5);
+					film_Icons.Add(film_Icon);
+					wrappanel.Children.Add(film_Icon);
+				}
 			}
 			var genres = db.AllGenres.ToList();
 			foreach (AllGenre genre in genres)

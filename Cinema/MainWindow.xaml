@@ -40,7 +40,7 @@
                 </StackPanel.Resources>
                 <Button Content="Главная" Width="125"/>
                 <Button Content="Афиша" Width="110" Click="Films_open"/>
-                <Button Content="Контакты" Width="130"/>
+                <Button Content="Контакты" Width="130" Click="Contacts_open"/>
                 <Button Content="Вакансии" Width="140" Click="Vacancies_open"/>
                 <Button Content="Личный кабинет" Width="225" Click="Account_open"/>
             </StackPanel>

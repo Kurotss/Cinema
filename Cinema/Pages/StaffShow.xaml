@@ -1,0 +1,53 @@
+﻿<Page x:Class="Cinema.Pages.StaffShow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cinema.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StaffShow">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <GroupBox Margin="30" >
+                    <GroupBox.Header>
+                        <TextBlock Text="Сотрудники" Background="Transparent" FontSize="30"/>
+                    </GroupBox.Header>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Width="200" Height="60" FontSize="20" Margin="10" Background="#FFE26C" Click="StartDelete">
+                                <TextBlock Text="Нажмите, чтобы удалить сотрудников" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </Button>
+                            <TextBlock Text="Зажмите Ctrl, чтобы выбрать несколько записей" FontSize="20" Background="#FFE26C"
+                   Name="Tip" TextWrapping="Wrap" Width="300" Margin="10" Visibility="Hidden"/>
+                        </StackPanel>
+                        <DataGrid Name="StaffersTable" AutoGenerateColumns="False" Background="Transparent" FontSize="17" RowEditEnding="EditStaff">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Header="Фамилия"/>
+                                <DataGridTextColumn Binding="{Binding NameStaffer, UpdateSourceTrigger=PropertyChanged}" Header="Имя"/>
+                                <DataGridTextColumn Binding="{Binding NumberTelephon, UpdateSourceTrigger=PropertyChanged}" Header="Номер телефона"/>
+                                <DataGridTextColumn Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Header="E-mail"/>
+                                <DataGridTextColumn Binding="{Binding IdPost, UpdateSourceTrigger=PropertyChanged}" Header="Номер должности"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="30">
+                    <GroupBox.Header>
+                        <TextBlock Text="Сотрудники" Background="Transparent" FontSize="30"/>
+                    </GroupBox.Header>
+                    <DataGrid Name="StateTable" AutoGenerateColumns="False" Background="Transparent" FontSize="17" RowEditEnding="EditState" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdPost, UpdateSourceTrigger=PropertyChanged}" Header="Номер должности" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding CountStaffers, UpdateSourceTrigger=PropertyChanged}" Header="Количество необходимых сотрудников"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Content="Удалить" Margin="30,10" FontSize="20" Width="100" Background="#FFE26C" HorizontalAlignment="Right"
+                Height="40" Name="DeleteStaff" VerticalAlignment="Bottom" Visibility="Hidden" Click="FinalDelete"/>
+    </Grid>
+</Page>

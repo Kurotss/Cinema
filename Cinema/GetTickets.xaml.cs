@@ -16,9 +16,6 @@ using System.Text.RegularExpressions;
 
 namespace Cinema
 {
-	/// <summary>
-	/// Логика взаимодействия для GetTickets.xaml
-	/// </summary>
 	public partial class GetTickets : Window
 	{
 

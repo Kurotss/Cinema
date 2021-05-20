@@ -42,7 +42,8 @@ namespace Cinema
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-62MFGKR; Database=Cinema; Trusted_Connection=true");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-62MFGKR; Database=Cinema; Trusted_connection=true");
             }
         }
 
@@ -142,8 +143,6 @@ namespace Cinema
 
                 entity.ToView("Films_raitings_genres");
 
-                entity.Property(e => e.IdFilm).HasColumnName("ID_film");
-
                 entity.Property(e => e.AgeLimit).HasColumnName("Age_limit");
 
                 entity.Property(e => e.Description)
@@ -154,6 +153,8 @@ namespace Cinema
                     .HasMaxLength(35)
                     .IsUnicode(false);
 
+                entity.Property(e => e.IdFilm).HasColumnName("ID_film");
+
                 entity.Property(e => e.NameFilm)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -161,6 +162,10 @@ namespace Cinema
                     .HasColumnName("Name_film");
 
                 entity.Property(e => e.Poster).HasColumnType("image");
+
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("date")
+                    .HasColumnName("End_date");
             });
 
             modelBuilder.Entity<Form>(entity =>
@@ -216,9 +221,7 @@ namespace Cinema
                 entity.HasKey(e => e.IdMovie)
                     .HasName("PK_Movies_1");
 
-                entity.Property(e => e.IdMovie)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID_movie");
+                entity.Property(e => e.IdMovie).HasColumnName("ID_movie");
 
                 entity.Property(e => e.IdFilm).HasColumnName("ID_film");
 
@@ -493,7 +496,7 @@ namespace Cinema
                     .HasColumnName("Name_staffer");
 
                 entity.Property(e => e.NumberTelephon)
-                    .HasMaxLength(12)
+                    .HasMaxLength(16)
                     .IsUnicode(false)
                     .HasColumnName("Number_telephon");
 

@@ -7,9 +7,6 @@ using System.Windows.Media.Imaging;
 
 namespace Cinema.Pages
 {
-	/// <summary>
-	/// Логика взаимодействия для FilmInfo.xaml
-	/// </summary>
 	public partial class FilmInfo : Page
 	{
 		public List<MoviesAndDates> moviesGroups;
@@ -111,6 +108,11 @@ namespace Cinema.Pages
 			raiting.Rating1 = (raiting.Rating1 * raiting.CountOfPeopleInRaiting + count) / (raiting.CountOfPeopleInRaiting + 1);
 			raiting.CountOfPeopleInRaiting++;
 			db.SaveChanges();
+		}
+
+		private void GoBack(object sender, RoutedEventArgs e)
+		{
+			Manager.mainwindow.MainFrame.Navigate(new FilmsShow());
 		}
 	}
 }

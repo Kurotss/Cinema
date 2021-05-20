@@ -39,13 +39,13 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Content="Афиша" Width="110" Click="FilmsOpen"/>
-                <Button Content="Заявки" Width="130"/>
-                <Button Content="Сотрудники и штат" Width="240"/>
+                <Button Content="Заявки" Width="130" Click="FormsOpen"/>
+                <Button Content="Сотрудники и штат" Width="240" Click="StaffOpen"/>
             </StackPanel>
             <TextBlock Name="Head" Margin="10,10,271,99"  Text="Добро пожаловать, admin!" FontSize="26" Grid.Row="0" Foreground="#3B3B3B"/>
             <Button Style="{StaticResource ColorFont}" Content="Выйти" Margin="789,10,10,99" Width="75" Grid.Row="0" FontSize="23"
                     FontWeight="Bold" Click="Exit"/>
         </Grid>
-        <Frame Name="MainFrame" Grid.Row="2" Grid.Column="1"/>
+        <Frame Name="MainFrame" Grid.Row="2" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

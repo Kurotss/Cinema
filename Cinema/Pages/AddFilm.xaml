@@ -8,9 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddFilm">
 
-    <Grid>
+    <Grid Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="38*"/>
             <RowDefinition Height="38*"/>
             <RowDefinition Height="38*"/>
             <RowDefinition Height="38*"/>
@@ -38,6 +40,19 @@
                 <Setter Property="Foreground" Value="#3B3B3B"/>
                 <Setter Property="Margin" Value="0,0,5,0"/>
             </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#303030"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Grid.Resources>
         <TextBlock Text="Название фильма" Grid.Row="1"/>
         <TextBlock Text="Описание фильма" Grid.Row="3"/>
@@ -45,17 +60,20 @@
         <TextBlock Text="Дата начала показа" Grid.Row="7"/>
         <TextBlock Text="Дата окончания показа" Grid.Row="9"/>
         <TextBlock Text="Постер" Grid.Row="11"/>
+        <TextBlock Text="Жанр" Grid.Row="13"/>
         <TextBox Name="NameInput" Grid.Row="1" Grid.Column="1"/>
         <TextBox Name="DescriptionInput" Grid.Row="3" Grid.Column="1"/>
-        <TextBox Name="AgeInput" Grid.Row="5" Grid.Column="1"/>
+        <TextBox Name="AgeInput" Grid.Row="5" Grid.Column="1" MaxLength="2"/>
         <TextBox Name="PosterInput" Grid.Row="11" Grid.Column="1"/>
+        <ComboBox Name="GenreInput" Grid.Row="13" Grid.Column="1"/>
         <DatePicker Name="AirDate" Grid.Row="7" Grid.Column="1"/>
         <DatePicker Name="EndDate" Grid.Row="9" Grid.Column="1"/>
-        <Button Grid.Column="2" Grid.Row="11" Width="35" HorizontalAlignment="Left">
+        <Button Grid.Column="2" Grid.Row="11" Width="28" HorizontalAlignment="Left" Click="LoadImage">
             <Button.Content>
                 <Image Source="/Resources/download.png"/>
             </Button.Content>
         </Button>
-        <Button Name="Input" Content="Добавить" Grid.Row="13" Grid.Column="1" Style="{StaticResource Button_gradient}"/>
+        <TextBlock Name="ImageError" Grid.Row="11" Grid.Column="2" Text="Ошибка открытия файла" FontSize="10" TextWrapping="Wrap" Width="80" Foreground="Red" Visibility="Hidden"/>
+        <Button Name="Input" Content="Добавить" Grid.Row="15" Grid.Column="1" Style="{StaticResource Button_gradient}" Click="AddNewFilm"/>
     </Grid>
 </Page>

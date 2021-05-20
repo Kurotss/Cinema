@@ -10,5 +10,7 @@ namespace Cinema
 	public class MovieButtonInfo : MoviesSort
 	{
 		public Button buttonTime;
+		public Movie stringMovie;
+		public WrapPanel panel;
 	}
 }

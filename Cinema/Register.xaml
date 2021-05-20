@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Cinema"
         mc:Ignorable="d"
-        Title="Регистрация" Height="470" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Регистрация" Height="490" Width="800" WindowStartupLocation="CenterScreen"
         Icon="/Resources/logo.png">
     <Grid Name="RegForm">
         <Grid.Resources>
@@ -15,6 +15,45 @@
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Foreground" Value="#3B3B3B"/>
                 <Setter Property="Margin" Value="0,0,5,0"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#303030"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="PasswordBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#303030"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="xctk:MaskedTextBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#303030"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF5757" Offset="0"/>
+                            <GradientStop Color="#5271FF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -61,10 +100,10 @@
         <TextBlock Text="Повторите пароль" Grid.Column="2" Grid.Row="12" FontSize="20"/>
         <TextBlock Text="Пароли не совпадают" Grid.Column="4" Grid.Row="12" FontSize="10" TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Red"
                   Name="ErrorInPasswords" Visibility="Hidden"/>
-        <TextBox Name="SurnameInput" Grid.Row="2" Grid.Column="3" FontSize="20"/>
-        <TextBox Name="NameInput" Grid.Row="4" Grid.Column="3" FontSize="20"/>
-        <xctk:MaskedTextBox Name="TelephonInput" Grid.Row="6" Grid.Column="3" FontSize="20" Mask="+0(000)000-00-00"/>
-        <TextBox Name="EmailInput" Grid.Row="8" Grid.Column="3" FontSize="20"/>
+        <TextBox Name="SurnameInput" Grid.Row="2" Grid.Column="3"/>
+        <TextBox Name="NameInput" Grid.Row="4" Grid.Column="3" />
+        <xctk:MaskedTextBox Name="TelephonInput" Grid.Row="6" Grid.Column="3" Mask="+0(000)000-00-00"/>
+        <TextBox Name="EmailInput" Grid.Row="8" Grid.Column="3"/>
         <PasswordBox Name="PasswordInput" Grid.Row="10" Grid.Column="3" FontSize="20"/>
         <PasswordBox Name="PasswordSecondInput" Grid.Row="12" Grid.Column="3" FontSize="20"/>
         <Button Content="Зарегистрироваться" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="14" Style="{StaticResource Button_gradient}" Click="RegButton"/>

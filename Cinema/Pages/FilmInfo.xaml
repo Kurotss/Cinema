@@ -10,6 +10,7 @@
 
     <Grid>
         <StackPanel>
+            <Button Content="Назад" HorizontalAlignment="Left" FontSize="20" Background="#FFE26C" Margin="10" Click="GoBack"/>
             <StackPanel Orientation="Horizontal" Height="250">
                 <Image Name="PosterImage" Width="150" Height="200" Margin="20"/>
                 <ScrollViewer>

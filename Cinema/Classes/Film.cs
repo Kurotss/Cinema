@@ -16,8 +16,8 @@ namespace Cinema
         public int IdFilm { get; set; }
         public string NameFilm { get; set; }
         public int? AgeLimit { get; set; }
-        public DateTime? AirDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime AirDate { get; set; }
+        public DateTime EndDate { get; set; }
         public byte[] Poster { get; set; }
         public string Description { get; set; }
 

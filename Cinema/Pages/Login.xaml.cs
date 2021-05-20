@@ -37,6 +37,10 @@ namespace Cinema
 							break;
 					}
 				}
+				if (users.Count == 0)
+				{
+					MessageBox.Show("Такого пользователя не существует");
+				}
 			}
 		}
 	}

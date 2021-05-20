@@ -67,58 +67,56 @@ namespace Cinema.Pages
 				{
 					TextBox box = (TextBox)element;
 					box.BorderBrush = Brushes.GreenYellow;
-					if (box.Name == "EmailInput" && box.IsEnabled)
+					if (box.Name == "EmailInput")
 					{
-						if (!Regex.IsMatch(box.Text, @"^[^\.\ ]\S+\@[a-zA-Z0-9]\S+\.\S+$"))
+						if (!Regex.IsMatch(EmailInput.Text, @"^[^\.\ ]\S+\@[a-zA-Z0-9]\S+\.\S+$"))
 						{
-							box.BorderBrush = Brushes.Red;
+							EmailInput.BorderBrush = Brushes.Red;
 							AllCorrect = false;
 						}
 						else
 						{
-							box.IsEnabled = false;
-							EmailClient = box.Text;
+							EmailInput.IsEnabled = false;
+							EmailClient = EmailInput.Text;
 						}
 					}
 					else if (box.Name == "TelephonInput")
 					{
-						if (!Regex.IsMatch(box.Text, @"^\+\d\(\d\d\d\)\d\d\d\-\d\d\-\d\d$"))
+						if (!Regex.IsMatch(TelephonInput.Text, @"^\+\d\(\d\d\d\)\d\d\d\-\d\d\-\d\d$"))
 						{
-							box.BorderBrush = Brushes.Red;
+							TelephonInput.BorderBrush = Brushes.Red;
 							AllCorrect = false;
 						}
-						else TelephonClient = box.Text;
+						else TelephonClient = TelephonInput.Text;
 					}
-					else
+					else if (box.Name == "SurnameInput" || box.Name == "NameInput")
 					{
 						if (!Regex.IsMatch(box.Text, @"^[a-zA-Z]+$") && !Regex.IsMatch(box.Text, @"^[а-яА-Я]+$"))
-						//^ - символы в начале строки, + - 1 и больше раз может повторяться, $ - в конце строки
 						{
 							box.BorderBrush = Brushes.Red;
 							AllCorrect = false;
 						}
 						else
 						{
-							if (box.Name == "NameClient") NameClient = box.Text;
-							else if (box.Name == "SurnameClient") SurnameClient = box.Text;
+							if (box.Name == "SurnameInput") SurnameClient = box.Text;
+							if (box.Name == "NameInput") NameClient = box.Text;
 						}
 					}
 				}
-				if (element.Name == "PasswordInput" && element.IsEnabled)
+			}
+			if (PasswordInput.IsEnabled)
 				{
-					PasswordBox box = (PasswordBox)element;
-					box.BorderBrush = Brushes.GreenYellow;
-					if (!Regex.IsMatch(box.Password, @"^[^\@\'\ а-яА-Я]+$"))
-					{
-						box.BorderBrush = Brushes.Red;
-						AllCorrect = false;
-					}
-					else
-					{
-						box.IsEnabled = false;
-						PasswordClient = box.Password;
-						box.Password = null;
-					}
+				PasswordInput.BorderBrush = Brushes.GreenYellow;
+				if (!Regex.IsMatch(PasswordInput.Password, @"^[^\@\'\ а-яА-Я]+$"))
+				{
+					PasswordInput.BorderBrush = Brushes.Red;
+					AllCorrect = false;
+				}
+				else
+				{
+					PasswordInput.IsEnabled = false;
+					PasswordClient = PasswordInput.Password;
+					PasswordInput.Password = null;
 				}
 			}
 			if (AllCorrect)
