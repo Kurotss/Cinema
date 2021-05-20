@@ -29,6 +29,7 @@ namespace Cinema.Pages
 			StaffersTable.ItemsSource = db.staff.ToList();
 			maxIdPost = db.Posts.Max(item => item.IdPost);
 			StateTable.ItemsSource = db.StateCinemas.ToList();
+			PostsTable.ItemsSource = db.Posts.ToList();
 		}
 		private void StartDelete(object sender, RoutedEventArgs e)
 		{
@@ -119,6 +120,22 @@ namespace Cinema.Pages
 			{
 				MessageBox.Show("Ошибка добавления данных! Некорректные значения.");
 			}
+		}
+
+		private void GetReport(object sender, RoutedEventArgs e)
+		{
+			CinemaContext db = new();
+			var report = from tickets in db.Tickets
+						 join movies in db.Movies on tickets.IdMovie equals movies.IdMovie
+						 join films in db.Films on movies.IdFilm equals films.IdFilm
+						 group tickets by new { films.NameFilm} into g
+						 select new
+						 {
+							 NameFilm = g.Key.NameFilm,
+							 SumValue = g.Count()
+							};
+			ReportTable.ItemsSource = report;
+			ReportView.Visibility = Visibility.Visible;
 		}
 	}
 }

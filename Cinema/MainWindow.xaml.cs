@@ -36,7 +36,7 @@ namespace Cinema
 			this.Close();
 			foreach (Window window1 in Application.Current.Windows)
 			{
-				window1.Close();
+				if (window1 is not FirstWindow) window1.Close();
 			}
 		}
 

@@ -42,10 +42,10 @@ namespace Cinema.Pages
 				foreach (var item in FormsList.SelectedItems)
 				{
 					Form form = item as Form;
-					FormsList.Items.Remove(item);
 					db.Forms.Remove(form);
 				}
 				db.SaveChanges();
+				FormsList.ItemsSource = db.Forms.ToList();
 				Tip.Visibility = Visibility.Hidden;
 				DeleteForms.Visibility = Visibility.Hidden;
 			}

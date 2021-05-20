@@ -36,7 +36,7 @@
                 </GroupBox>
                 <GroupBox Margin="30">
                     <GroupBox.Header>
-                        <TextBlock Text="Сотрудники" Background="Transparent" FontSize="30"/>
+                        <TextBlock Text="Штат" Background="Transparent" FontSize="30"/>
                     </GroupBox.Header>
                     <DataGrid Name="StateTable" AutoGenerateColumns="False" Background="Transparent" FontSize="17" RowEditEnding="EditState" CanUserAddRows="False">
                         <DataGrid.Columns>
@@ -45,6 +45,30 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
+                <GroupBox Margin="30">
+                    <GroupBox.Header>
+                        <TextBlock Text="Должности" Background="Transparent" FontSize="30"/>
+                    </GroupBox.Header>
+                    <DataGrid Name="PostsTable" AutoGenerateColumns="False" Background="Transparent" FontSize="17" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdPost, UpdateSourceTrigger=PropertyChanged}" Header="Номер должности" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding NamePost, UpdateSourceTrigger=PropertyChanged}" Header="Название должности" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+                <Button Content="Получить отчёт" Background="#FFE26C" FontSize="20" Width="200" Click="GetReport" Margin="0,100"/>
+                <GroupBox Margin="30" Name="ReportView" Visibility="Hidden">
+                    <GroupBox.Header>
+                        <TextBlock Text="Отчёт" Background="Transparent" FontSize="30"/>
+                    </GroupBox.Header>
+                    <DataGrid Name="ReportTable" AutoGenerateColumns="False" Background="Transparent" FontSize="17" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding IdPost, UpdateSourceTrigger=PropertyChanged}" Header="Номер должности" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding NamePost, UpdateSourceTrigger=PropertyChanged}" Header="Название должности" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+               
             </StackPanel>
         </ScrollViewer>
         <Button Content="Удалить" Margin="30,10" FontSize="20" Width="100" Background="#FFE26C" HorizontalAlignment="Right"
