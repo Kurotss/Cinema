@@ -40,7 +40,7 @@
                         <StackPanel Grid.Row="0" Height="110" VerticalAlignment="Bottom" Orientation="Horizontal">
                             <Image Name="PosterFilm" Height="90" Width="60" Margin="40,10,40,10"/>
                             <StackPanel Width="660">
-                                <TextBlock Name="Header" FontSize="22" Foreground="White" Height="30" Margin="0,25,0,0"/>
+                                <TextBlock Name="Header" FontSize="22" Foreground="White" Height="30" Text="{Binding Path=ThisMovie.NameFilm}" Margin="0,25,0,0"/>
                                 <TextBlock Name="Time" FontSize="18" Height="30" Foreground="White" Margin="0,5,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -72,26 +72,24 @@
                         <TextBlock Text="7"/>
                         <TextBlock Text="8"/>
                     </StackPanel>
-                    <WrapPanel Height="170" Name="wrappanelFirst" VerticalAlignment="Center" Grid.Row="2" Margin="200,0,200,0"/>
-                    <WrapPanel Height="49" Name="wrappanelSecond" VerticalAlignment="Center" Grid.Row="3" Margin="103,0,103,0"/>
-                    <StackPanel Name="NumberRowRight" Grid.Row="2" Grid.RowSpan="2" Width="106" HorizontalAlignment="Left" Margin="694,0,0,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextAlignment" Value="Left"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="Margin" Value="1.8"/>
-                            </Style>
-                        </StackPanel.Resources>
-                        <TextBlock Text="1"/>
-                        <TextBlock Text="2"/>
-                        <TextBlock Text="3"/>
-                        <TextBlock Text="4"/>
-                        <TextBlock Text="5"/>
-                        <TextBlock Text="6"/>
-                        <TextBlock Text="7"/>
-                        <TextBlock Text="8"/>
-                    </StackPanel>
+                    <ListView Grid.Row="2" Margin="200,0,200,0" ItemsSource="{Binding Path=ListPlaces}"
+                              Background="Transparent" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="10"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource Place_button}" Click="ChoosePlace" Grid.Column="{Binding numberPlace}"
+                                        Grid.Row="{Binding row}">
+                                    <Button.ToolTip>
+                                        <TextBlock TextAlignment="Center" FontSize="15" Text= "{Binding row}"/>
+                                    </Button.ToolTip>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ListView>
                     <Button Name="CostButton" HorizontalAlignment="Right" Grid.Row="5" VerticalAlignment="Bottom" Margin="5" Width="90"
                             Height="40" FontSize="18" Background="#FFE26C" Visibility="Hidden" Click="OpenCheque"/>
                 </Grid>

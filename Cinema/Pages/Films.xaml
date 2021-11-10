@@ -56,7 +56,49 @@
                         </Button>
                     </WrapPanel>
                 </Expander>
-                <WrapPanel Name="wrappanel"/>
+                <ListView ItemsSource="{Binding Path=FilmsList}" Background="Transparent">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Canvas Name="Canvas" Width="206" Height="313" ClipToBounds="true" Background="Transparent" MouseEnter="Info" MouseLeave="InfoLeave">
+                                    <Canvas.Resources>
+                                        <Style x:Key="Title_gradient" TargetType="TextBlock">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0,1" Opacity="0.8">
+                                                        <GradientStop Color="#3B3B3B" Offset="0"/>
+                                                        <GradientStop Color="#3B3B3B" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Canvas.Resources>
+                                    <Image Width="206" Height="313" Source="{Binding Poster}" Canvas.Bottom="0"/>
+                                    <TextBlock Width="206" Height="55" FontSize="16" Foreground="White" Text="{Binding NameFilm}" TextAlignment="Center"
+                       FontWeight="Bold" Canvas.Bottom="0" TextWrapping="Wrap" FontFamily="Verdana" Style="{StaticResource Title_gradient}"/>
+                                    <Button Name="RatButton" Width="206" Height="0" Background="#303030" Foreground="White" Canvas.Bottom="0"  Click="OpenInfo">
+                                        <StackPanel Margin="0,5">
+                                            <Border CornerRadius="15" BorderBrush="White" Background="White" Width="60" Padding="4">
+                                                <StackPanel Orientation="Horizontal" Height="20">
+                                                    <TextBlock Width="29" Height="24" FontSize="22" Text="{Binding Rating}" TextAlignment="Right"
+                                   Foreground="#303030" Margin="0,-6,0,0"/>
+                                                    <Image Source="Resources/star.png" Width="25" Height="20"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <TextBlock Width="206" Height="60" FontSize="17" Text="{Binding Genre}" Margin="0,5"
+                        Foreground="#B6B6B4" TextAlignment="Center" FontFamily="Verdana"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Canvas>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -19,42 +19,24 @@ namespace Cinema
 	public partial class GetTickets : Window
 	{
 
-		public List<ButtonPlaces> listPlaces;
+		public List<ButtonPlaces> ListPlaces { get; set; }
 		public List<ButtonPlaces> selectedPlaces;
 		public int cost = 0;
-		public int IdMovieTicket;
-		public int IdRoomTicket;
-		public string nameOfFilm;
-		public DateTime movieTime;
+		public MoviesSort ThisMovie { get; set; }
 		public GetTickets(MoviesSort movie)
 		{
 			InitializeComponent();
-			listPlaces = new List<ButtonPlaces>();
-			selectedPlaces = new List<ButtonPlaces>();
+			DataContext = this;
+			ThisMovie = movie;
+			ListPlaces = new List<ButtonPlaces>();
 			using CinemaContext db = new();
-			int row = 0;
-			IdMovieTicket = (int)movie.IdMovie;
-			IdRoomTicket = (int)movie.IdRoom;
-			var poster = db.Films.FromSqlRaw("SELECT * FROM dbo.Films WHERE (Name_film = {0})", movie.NameFilm);
-			foreach (Film film in poster)
-			{
-				PosterFilm.Source = Manager.CreateSource(film.Poster);
-			}
-			Header.Text = movie.NameFilm;
-			nameOfFilm = movie.NameFilm;
-			movieTime = movie.MovieTime;
+			PosterFilm.Source = Manager.CreateSource(db.Films.Find(ThisMovie.IdFilm).Poster);
 			Time.Text = "Зал " + movie.IdRoom + ", " + movie.TypeView + ", " + movie.MovieTime.ToString("M") + ", " +
 				movie.MovieTime.ToString("t");
 			SqlParameter parameter = new("@id_movie", movie.IdMovie);
 			var places = db.AvailablePlaces.FromSqlRaw("RoomPlaces @id_movie", parameter).ToList();
 			foreach (AvailablePlace place in places)
 			{
-				TextBlock textBlock = new()
-				{
-					Text = place.NumberRow + " ряд, " + place.NumberPlace + " место" + Environment.NewLine + movie.SalaryForPlace + " ₽",
-					TextAlignment = TextAlignment.Center,
-					FontSize = 15
-				};
 				Button ellipse = new();
 				if (place.IdTicket is null)
 				{
@@ -62,36 +44,7 @@ namespace Cinema
 					ellipse.Click += ChoosePlace;
 				}
 				else ellipse.Style = (Style)FindResource("Non-free_place_button");
-				ToolTip toolTip = new()
-				{
-					Content = textBlock,
-					PlacementTarget = ellipse,
-					Placement = PlacementMode.Top
-				};
-				ellipse.ToolTip = toolTip;
-				row = place.NumberRow;
-				if (place.NumberRow < 8)
-				{
-					wrappanelFirst.Children.Add(ellipse);
-				}
-				else if (place.NumberRow >= 8)
-				{
-					wrappanelSecond.Children.Add(ellipse);
-				}
-				listPlaces.Add(new ButtonPlaces { place = ellipse, numberPlace = place.NumberPlace, row = place.NumberRow, salary = (int)movie.SalaryForPlace});
-			}
-			if (row == 9)
-			{
-				TextBlock textblock = new()
-				{
-					Text = row.ToString()
-				};
-				TextBlock textBlock2 = new()
-				{
-					Text = row.ToString()
-				};
-				NumberRowLeft.Children.Add(textblock);
-				NumberRowRight.Children.Add(textBlock2);
+				ListPlaces.Add(new ButtonPlaces { place = ellipse, numberPlace = place.NumberPlace, row = place.NumberRow, salary = (int)movie.SalaryForPlace});
 			}
 		}
 
@@ -103,7 +56,7 @@ namespace Cinema
 		private void ChoosePlace(object sender, RoutedEventArgs e)
 		{
 			Button button = (Button)sender;
-			ButtonPlaces place = listPlaces.Find(item => item.place == button);
+			ButtonPlaces place = ListPlaces.Find(item => item.place == button);
 			if (selectedPlaces.Find(item => item.place == button) is null)
 			{
 				selectedPlaces.Add(place);
@@ -168,7 +121,7 @@ namespace Cinema
 				using CinemaContext db = new();
 				foreach (ButtonPlaces ticket in selectedPlaces)
 				{
-					RealTicket newTicket = new(nameOfFilm, movieTime, IdRoomTicket, ticket.row, ticket.numberPlace, cost) { Width = 800, Height = 400,
+					RealTicket newTicket = new(ThisMovie.NameFilm, ThisMovie.MovieTime, (int)ThisMovie.IdRoom, ticket.row, ticket.numberPlace, cost) { Width = 800, Height = 400,
 					HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top};
 					newTicket.Measure(new System.Windows.Size(newTicket.Width, newTicket.Height));
 					newTicket.Arrange(new Rect(new System.Windows.Point(0, 0), newTicket.DesiredSize));
@@ -180,7 +133,7 @@ namespace Cinema
 					encoder.Save(stream);
 					Bitmap bitmap = new Bitmap(stream);
 					bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
-					db.Tickets.Add(new Ticket { Email = Manager.Email, IdMovie = IdMovieTicket,
+					db.Tickets.Add(new Ticket { Email = Manager.Email, IdMovie = ThisMovie.IdMovie,
 							NumberPlace = ticket.numberPlace, NumberRow = ticket.row, ImageTicket = stream.ToArray()});
 				}
 				db.SaveChanges();

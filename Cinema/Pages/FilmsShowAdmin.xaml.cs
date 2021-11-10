@@ -20,7 +20,7 @@ namespace Cinema
 		public FilmsShowAdmin()
 		{
 			InitializeComponent();
-			film_Icons = new List<Film_icon>();
+			/*film_Icons = new List<Film_icon>();
 			deleteList = new List<Film_icon>();
 			using CinemaContext db = new();
 			var films = db.FilmsRaitingsGenres.ToList();
@@ -41,7 +41,7 @@ namespace Cinema
 				radioButton.Content = genre.Genre;
 				radioButton.Checked += GenreChecked;
 				Films_genre.Children.Add(radioButton);
-			}
+			}*/
 		}
 		private void GenreChecked(object sender, RoutedEventArgs e)
 		{

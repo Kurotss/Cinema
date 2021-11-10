@@ -20,6 +20,11 @@ namespace Cinema
 				SqlParameter login = new("@login", LoginBox.Text);
 				SqlParameter password = new("@password", Password.Password);
 				var users = db.UsersNames.FromSqlRaw("LogIN @login, @password", login, password).ToList();
+				if (users.Count == 0)
+				{
+					MessageBox.Show("Такого пользователя не существует");
+				}
+				else
 				foreach (UsersName user in users)
 				{
 					switch (user.IdRole)
@@ -36,10 +41,6 @@ namespace Cinema
 							Manager.window.Close();
 							break;
 					}
-				}
-				if (users.Count == 0)
-				{
-					MessageBox.Show("Такого пользователя не существует");
 				}
 			}
 		}

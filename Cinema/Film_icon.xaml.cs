@@ -9,7 +9,7 @@ namespace Cinema
 {
 	public partial class Film_icon : UserControl
 	{
-		public Film_icon(BitmapImage image, string name, string genre, string raiting, int ageLimit, int idRole, Film film)
+		public Film_icon(BitmapImage image, string name, string genre, double raiting, int ageLimit, int idRole, Film film)
 		{
 			InitializeComponent();
 			this.Poster_film = image;
@@ -28,7 +28,7 @@ namespace Cinema
 		public Button deleteButton { get; set; }
 		public string Name_film { get; set; }
 		public string Genres_list { get; set; }
-		public string Raiting_film { get; set; }
+		public double Raiting_film { get; set; }
 		public BitmapImage Poster_film { get; set; }
 		public string NewName { get; set; }
 		public int Age_limit { get; set; }

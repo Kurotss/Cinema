@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Cinema.Pages;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,27 +13,16 @@ namespace Cinema
 	public partial class FilmsShow : Page
 	{
 		public List<Film_icon> film_Icons;
+		public List<FilmsRaitingsGenre> FilmsList { get; set; }
 		public string SelectGenre = "";
 		public DateTime SelectedDate = DateTime.Now;
 		public int i = 0;
 		public FilmsShow()
 		{
 			InitializeComponent();
-			film_Icons = new List<Film_icon>();
+			DataContext = this;
 			using CinemaContext db = new();
-			var films = db.FilmsRaitingsGenres.ToList();
-			foreach (FilmsRaitingsGenre film in films)
-			{
-				if (film.EndDate > DateTime.Now)
-				{
-					Film filmString = db.Films.Find(film.IdFilm);
-					Film_icon film_Icon = new(Manager.CreateSource(film.Poster), film.NameFilm, film.Genre,
-						Math.Round(film.Rating, 1).ToString(), (int)film.AgeLimit, 1, filmString);
-					film_Icon.Margin = new Thickness(5, 5, 5, 5);
-					film_Icons.Add(film_Icon);
-					wrappanel.Children.Add(film_Icon);
-				}
-			}
+			FilmsList = db.FilmsRaitingsGenres.Where(p => p.EndDate > DateTime.Now).ToList();
 			var genres = db.AllGenres.ToList();
 			foreach (AllGenre genre in genres)
 			{
@@ -66,13 +56,13 @@ namespace Cinema
 
 		private void Search()
 		{
-			wrappanel.Children.Clear();
+			//wrappanel.Children.Clear();
 			using CinemaContext db = new();
 			SqlParameter isDate = new("@filters", "0");
 			if (i != 0) isDate = new("@filters", "1");
 			SqlParameter MovieDate = new("@date_movie", SelectedDate);
-			var films = db.Films.FromSqlRaw("SearchMovies @date_movie, @filters", MovieDate, isDate).ToList();
-			foreach (Film film in films)
+			FilmsList = db.FilmsRaitingsGenres.FromSqlRaw("SearchMovies @date_movie, @filters", MovieDate, isDate).ToList();
+			/*foreach (Film film in films)
 			{
 				Film_icon film_Icon = film_Icons.Find(item => item.Name_film == film.NameFilm);
 				if (film_Icon is not null)
@@ -88,7 +78,7 @@ namespace Cinema
 						}
 					}
 				}
-			}
+			}*/
 		}
 
 		private void InputSearch(object sender, TextChangedEventArgs e)
@@ -155,6 +145,26 @@ namespace Cinema
 				}
 			}
 			Search();
+		}
+
+		private void Info(object sender, RoutedEventArgs e)
+		{
+			Canvas canvas = (Canvas)sender;
+			Manager.Animation(canvas, 0, 90, 0);
+			Manager.Animation(canvas, canvas.Height, canvas.Height + 30, 1);
+			Manager.Animation(canvas, canvas.Width, canvas.Width + 30, 2);
+		}
+		private void InfoLeave(object sender, RoutedEventArgs e)
+		{
+			Canvas canvas = (Canvas)sender;
+			Manager.Animation(canvas, 90, 0, 0);
+			Manager.Animation(canvas, canvas.Height + 30, canvas.Height, 1);
+			Manager.Animation(canvas, canvas.Width + 30, canvas.Width, 2);
+		}
+
+		private void OpenInfo(object sender, RoutedEventArgs e)
+		{
+			Manager.mainwindow.PageOpen(new FilmInfo("Интерстеллар"));
 		}
 	}
 }
